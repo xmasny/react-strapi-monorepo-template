@@ -1,0 +1,43 @@
+services:
+  mysql:
+    container_name: mysql2
+    image: mysql:latest
+    networks:
+      - app
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - mysql2:/var/lib/mysql
+    ports:
+      - '3306:3306'
+  strapi:
+    container_name: strapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: strapi
+    networks:
+      - app
+    restart: unless-stopped
+    env_file:
+      - apps/strapi/.env
+      - .env
+    volumes:
+      - ./apps/strapi/config:/opt/app/config
+      - ./apps/strapi/src:/opt/app/src
+      - ./apps/strapi/package.json:/opt/app/package.json
+      - ./yarn.lock:/opt/yarn.lock
+      - ./apps/strapi/public/uploads:/opt/app/public/uploads
+    ports:
+      - '1337:1337'
+    depends_on:
+      - mysql
+networks:
+  app:
+    driver: bridge
+volumes:
+  mysql2:
+    name: mysql2
+    external: true

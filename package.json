@@ -1,0 +1,37 @@
+{
+  "name": "react-strapi-monorepo-template",
+  "version": "0.0.1",
+  "private": true,
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xmasny/react-strapi-monorepo-template.git"
+  },
+  "scripts": {
+    "dev:web": "concurrently -k -n \"web,storybook\" -c \"blue,magenta\" \"yarn workspace @react-strapi-monorepo-template/web dev\" \"yarn workspace  @react-strapi-monorepo-template/storybook storybook\"",
+    "prepare": "husky",
+    "typecheck": "tsc --noEmit"
+  },
+  "lint-staged": {
+    "**/package.json": [
+      "sort-package-json",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
+    "prettier": "^3.5.3",
+    "sort-package-json": "^3.0.0",
+    "tsc": "^2.0.4",
+    "typescript": "^5.8.2"
+  },
+  "packageManager": "yarn@4.7.0",
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "apps/*"
+    ]
+  }
+}

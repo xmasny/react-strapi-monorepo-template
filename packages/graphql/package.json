@@ -1,0 +1,21 @@
+{
+  "name": "@react-strapi-monorepo-template/graphql",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "codegen": "graphql-codegen --config codegen.ts"
+  },
+  "dependencies": {
+    "graphql": "^16.10.0"
+  },
+  "devDependencies": {
+    "@0no-co/graphqlsp": "^1.12.16",
+    "@graphql-codegen/cli": "^5.0.5",
+    "@graphql-codegen/schema-ast": "^4.1.0",
+    "@graphql-typed-document-node/core": "^3.2.0"
+  }
+}
