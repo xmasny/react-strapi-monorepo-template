@@ -1,34 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# React Strapi Monorepo Template
+
+This repository is a comprehensive template designed to establish a monorepo structure using both React for frontend development and Strapi for backend development. The project follows well-defined conventions and best practices to make the development experience seamless and unified.
+
+---
+
+## Features
+
+- **apps/web:** A React-based frontend application built with Vite and leveraging HeroUI for UI components.
+- **apps/strapi:** A Strapi-based backend, ready to be configured and deployed for content management.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Web Frontend:
+The frontend application is located under `apps/web`.
+1. Navigate to `apps/web`.
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
+3. Run the development server:
+    ```bash
+    npm run dev
+    ```
+4. Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Strapi Backend:
+The backend application is located under `apps/strapi`.
+1. Navigate to `apps/strapi`.
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
+3. Start the Strapi server:
+    ```bash
+    npm run develop
+    ```
+4. Access Strapi Admin Panel at [http://localhost:1337](http://localhost:1337).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Deployment
 
-## Learn More
+### Web Application:
+Use platforms like Vercel or Netlify to deploy the React frontend.
 
-To learn more about Next.js, take a look at the following resources:
+### Backend:
+Refer to the [Strapi deployment documentation](https://docs.strapi.io/dev-docs/deployment) for detailed instructions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This repository is licensed under the [MIT license](https://github.com/xmasny/react-strapi-monorepo-template/blob/main/LICENSE).
