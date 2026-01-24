@@ -22,8 +22,8 @@
     "@tanstack/router-devtools": "^1.157.3",
     "clsx": "2.1.1",
     "framer-motion": "12.29.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "tailwind-variants": "3.2.2",
     "tailwindcss": "4.1.18"
   },
@@ -32,11 +32,11 @@
     "@storybook/react": "8.6.9",
     "@tanstack/router-plugin": "^1.157.3",
     "@types/node": "20.5.7",
-    "@types/react": "19.0.12",
-    "@types/react-dom": "19.0.4",
+    "@types/react": "19.2.9",
+    "@types/react-dom": "19.2.3",
     "@typescript-eslint/eslint-plugin": "8.11.0",
     "@typescript-eslint/parser": "8.11.0",
-    "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-react": "^5.1.2",
     "autoprefixer": "10.4.19",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "9.1.0",
@@ -50,7 +50,7 @@
     "postcss": "8.5.6",
     "prettier": "3.3.3",
     "typescript": "5.6.3",
-    "vite": "^6.4.1",
+    "vite": "^7.3.1",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }
