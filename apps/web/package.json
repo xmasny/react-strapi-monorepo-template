@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@parcel/watcher": "^2.5.6",
-    "@tanstack/router-plugin": "^1.157.3",
+    "@tanstack/router-plugin": "^1.166.9",
     "@types/node": "20.19.30",
     "@types/react": "19.2.9",
     "@types/react-dom": "19.2.3",
@@ -49,7 +49,7 @@
     "eslint-plugin-unused-imports": "4.1.4",
     "postcss": "8.5.6",
     "prettier": "3.3.3",
-    "storybook": "8.6.9",
+    "storybook": "8.6.18",
     "typescript": "5.6.3",
     "vite": "^7.3.1",
     "vite-tsconfig-paths": "^5.1.4"
