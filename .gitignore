@@ -35,3 +35,4 @@ bun.lockb
 *storybook.log
 .yarn
 apps/strapi/.strapi/
+
