@@ -1,9 +1,8 @@
 import React from "react";
 import {Meta} from "@storybook/react";
-import {button} from "@heroui/theme";
-import {Camera, HeadphonesIcon, Notification} from "@heroui/shared-icons";
+import {Button, type ButtonProps} from "@heroui/react";
 
-import {Button, ButtonProps} from "@heroui/button";
+import {GithubIcon, HeartFilledIcon, SearchIcon} from "../components/icons";
 
 export default {
   title: "Components/Button",
@@ -13,13 +12,7 @@ export default {
       control: {
         type: "select",
       },
-      options: ["solid", "bordered", "light", "flat", "faded", "shadow", "ghost"],
-    },
-    color: {
-      control: {
-        type: "select",
-      },
-      options: ["default", "primary", "secondary", "success", "warning", "danger"],
+      options: ["primary", "secondary", "tertiary", "outline", "ghost", "danger", "danger-soft"],
     },
     size: {
       control: {
@@ -27,34 +20,12 @@ export default {
       },
       options: ["sm", "md", "lg"],
     },
-    spinnerPlacement: {
-      control: {
-        type: "select",
-      },
-      options: ["start", "end"],
-    },
     fullWidth: {
       control: {
         type: "boolean",
       },
     },
-    radius: {
-      control: {
-        type: "select",
-      },
-      options: ["none", "sm", "md", "lg", "full"],
-    },
     isDisabled: {
-      control: {
-        type: "boolean",
-      },
-    },
-    isLoading: {
-      control: {
-        type: "boolean",
-      },
-    },
-    disableAnimation: {
       control: {
         type: "boolean",
       },
@@ -64,8 +35,8 @@ export default {
 
 const defaultProps = {
   children: "Button",
-  spinnerPlacement: "start",
-  ...button.defaultVariants,
+  size: "md",
+  variant: "primary",
 };
 
 const StateTemplate = (args: ButtonProps) => {
@@ -110,18 +81,16 @@ export const IsDisabled = {
   },
 };
 
-export const DisableRipple = {
-  args: {
-    ...defaultProps,
-    disableRipple: true,
-  },
-};
-
 export const WithIcons = {
   args: {
     ...defaultProps,
-    startContent: <Notification className="fill-current" />,
-    endContent: <Camera className="fill-current" />,
+    children: (
+      <>
+        <HeartFilledIcon className="h-5 w-5" />
+        Button
+        <GithubIcon className="h-5 w-5" />
+      </>
+    ),
   },
 };
 
@@ -129,22 +98,13 @@ export const IconButton = {
   args: {
     ...defaultProps,
     isIconOnly: true,
-    children: <HeadphonesIcon className="w-5 h-5" />,
-  },
-};
-
-export const IsLoading = {
-  args: {
-    ...defaultProps,
-    color: "primary",
-    isLoading: true,
+    children: <SearchIcon className="h-5 w-5" />,
   },
 };
 
 export const CustomWithClassNames = {
   args: {
     ...defaultProps,
-    radius: "full",
     className: "bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg",
   },
 };

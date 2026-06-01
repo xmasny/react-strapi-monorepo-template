@@ -1,10 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { subtitle, title } from "@/components/primitives.ts";
-import { Link } from "@heroui/link";
-import { button as buttonStyles } from "@heroui/theme";
+import { Link, buttonVariants } from "@heroui/react";
 import { GithubIcon } from "@/components/icons.tsx";
-import { Snippet } from "@heroui/snippet";
-import { Code } from "@heroui/code";
 import DefaultLayout from "@/layouts/default.tsx";
 
 export const Route = createFileRoute("/")({
@@ -19,8 +16,8 @@ function RouteComponent() {
         <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
         <br />
         <span className={title()}>
-            websites regardless of your design experience.
-          </span>
+          websites regardless of your design experience.
+        </span>
         <div className={subtitle({ class: "mt-4" })}>
           Beautiful, fast and modern React UI library.
         </div>
@@ -28,19 +25,15 @@ function RouteComponent() {
 
       <div className="flex gap-3">
         <Link
-          isExternal
-          className={buttonStyles({
-            color: "primary",
-            radius: "full",
-            variant: "shadow"
+          className={buttonVariants({
+            variant: "primary",
           })}
           href='/docs'
         >
           Documentation
         </Link>
         <Link
-          isExternal
-          className={buttonStyles({ variant: "bordered", radius: "full" })}
+          className={buttonVariants({ variant: "outline" })}
           href='/about'
         >
           <GithubIcon size={20} />
@@ -49,12 +42,14 @@ function RouteComponent() {
       </div>
 
       <div className="mt-8">
-        <Snippet hideCopyButton hideSymbol variant="bordered">
-            <span>
-              Get started by editing{" "}
-              <Code color="primary">pages/index.tsx</Code>
-            </span>
-        </Snippet>
+        <div className="rounded-lg border border-separator px-4 py-3 text-sm text-foreground">
+          <span>
+            Get started by editing{" "}
+            <code className="rounded-sm bg-accent-soft px-1.5 py-0.5 text-accent-soft-foreground">
+              pages/index.tsx
+            </code>
+          </span>
+        </div>
       </div>
     </section>
   </DefaultLayout>;

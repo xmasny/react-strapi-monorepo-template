@@ -8,11 +8,13 @@
   "author": "",
   "scripts": {
     "build-storybook": "storybook build",
-    "storybook": "storybook dev -p 6006"
+    "storybook": "storybook dev -p 6006",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@chromatic-com/storybook": "3.2.7",
-    "@heroui/react": "^2.8.10",
+    "@heroui/react": "^3.0.5",
+    "@heroui/styles": "^3.0.5",
     "@react-strapi-monorepo-template/web": "workspace:*",
     "@storybook/addon-essentials": "8.6.9",
     "@storybook/addon-interactions": "8.6.9",
@@ -20,15 +22,15 @@
     "@storybook/react": "8.6.9",
     "@storybook/react-vite": "8.6.9",
     "@storybook/test": "8.6.9",
+    "@tailwindcss/postcss": "4.1.18",
     "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "10.4.19",
-    "framer-motion": "12.29.0",
-    "postcss": "8.4.38",
+    "postcss": "8.5.14",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "tailwindcss": "4.1.18",
     "typescript": "5.6.3",
-    "vite": "^6.4.1",
+    "vite": "^6.4.2",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {

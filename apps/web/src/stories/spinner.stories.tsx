@@ -1,7 +1,5 @@
 import {Meta} from "@storybook/react";
-import {spinner} from "@heroui/theme";
-
-import {Spinner, SpinnerProps} from "@heroui/spinner";
+import {Spinner, type SpinnerProps} from "@heroui/react";
 
 export default {
   title: 'Components/Spinner',
@@ -11,25 +9,13 @@ export default {
       control: {
         type: 'select'
       },
-      options: ['default', 'primary', 'secondary', 'success', 'warning', 'danger']
-    },
-    labelColor: {
-      control: {
-        type: 'select'
-      },
-      options: ['default', 'primary', 'secondary', 'success', 'warning', 'danger']
+      options: ['accent', 'current', 'danger', 'success', 'warning']
     },
     size: {
       control: {
         type: 'select'
       },
-      options: ['sm', 'md', 'lg']
-    },
-    variant: {
-      control: {
-        type: 'select'
-      },
-      options: ['default', 'simple', 'gradient', 'spinner', 'wave', 'dots']
+      options: ['sm', 'md', 'lg', 'xl']
     }
   },
   decorators: [
@@ -42,18 +28,19 @@ export default {
 } as Meta<typeof Spinner>;
 
 const defaultProps = {
-  ...spinner.defaultVariants,
+  color: "accent",
+  size: "md",
 };
 
 const VariantsTemplate = (args: SpinnerProps) => {
   return (
-    <div className="flex flex-wrap items-end gap-8 py-4">
-      <Spinner {...args} label="default" variant="default" />
-      <Spinner {...args} label="simple" variant="simple" />
-      <Spinner {...args} label="gradient" variant="gradient" />
-      <Spinner {...args} label="spinner" variant="spinner" />
-      <Spinner {...args} label="wave" variant="wave" />
-      <Spinner {...args} label="dots" variant="dots" />
+    <div className="flex flex-wrap items-end gap-8 py-4 text-sm text-muted">
+      {(["accent", "current", "danger", "success", "warning"] as const).map((color) => (
+        <div className="flex flex-col items-center gap-3" key={color}>
+          <Spinner {...args} aria-label={`${color} spinner`} color={color} />
+          <span>{color}</span>
+        </div>
+      ))}
     </div>
   );
 };
@@ -67,17 +54,19 @@ export const Default = {
 export const WithLabel = {
   args: {
     ...defaultProps,
-    label: "Loading...",
+    "aria-label": "Loading",
   },
+  render: (args: SpinnerProps) => (
+    <div className="flex items-center gap-3 text-sm text-muted">
+      <Spinner {...args} />
+      <span>Loading...</span>
+    </div>
+  ),
 };
 
 export const Variants = {
   args:{
     ...defaultProps,
-    classNames:{
-      label:"text-primary-400 mt-4",
-    },
-    labelColor:"default"
   },
   render:VariantsTemplate,
 };
