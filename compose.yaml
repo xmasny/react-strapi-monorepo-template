@@ -1,7 +1,7 @@
 services:
   postgres:
-    container_name: postgres
-    image: postgres:latest
+    container_name: postgres-classroom
+    image: postgres:17
     networks:
       - app
     restart: unless-stopped
@@ -10,7 +10,7 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - '5433:5432'
   strapi:
     container_name: strapi
     build:
@@ -24,6 +24,9 @@ services:
     env_file:
       - apps/strapi/.env
       - .env
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
     volumes:
       - ./apps/strapi/config:/opt/app/config
       - ./apps/strapi/src:/opt/app/src
@@ -40,4 +43,4 @@ networks:
 volumes:
   postgres:
     name: postgres
-    external: true
+    external: false
