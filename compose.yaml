@@ -1,16 +1,16 @@
 services:
-  mysql:
-    container_name: mysql2
-    image: mysql:latest
+  postgres:
+    container_name: postgres-classroom
+    image: postgres:17
     networks:
       - app
     restart: unless-stopped
     env_file:
       - .env
     volumes:
-      - mysql2:/var/lib/mysql
+      - postgres:/var/lib/postgresql/data
     ports:
-      - '3306:3306'
+      - '5433:5432'
   strapi:
     container_name: strapi
     build:
@@ -24,6 +24,9 @@ services:
     env_file:
       - apps/strapi/.env
       - .env
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
     volumes:
       - ./apps/strapi/config:/opt/app/config
       - ./apps/strapi/src:/opt/app/src
@@ -33,11 +36,11 @@ services:
     ports:
       - '1337:1337'
     depends_on:
-      - mysql
+      - postgres
 networks:
   app:
     driver: bridge
 volumes:
-  mysql2:
-    name: mysql2
-    external: true
+  postgres:
+    name: postgres
+    external: false

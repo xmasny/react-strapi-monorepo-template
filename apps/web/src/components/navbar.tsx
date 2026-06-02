@@ -1,17 +1,5 @@
-import { Button } from "@heroui/button";
-import { Kbd } from "@heroui/kbd";
-import { Link } from "@heroui/link";
-import { Input } from "@heroui/input";
-import {
-  Navbar as HeroUINavbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-} from "@heroui/navbar";
-import { link as linkStyles } from "@heroui/theme";
+import { useState } from "react";
+import { Button, Kbd, Link, buttonVariants } from "@heroui/react";
 import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
@@ -26,118 +14,113 @@ import {
 import { Logo } from "@/components/icons";
 
 export const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm",
-      }}
-      endContent={
-        <Kbd className="hidden lg:inline-block" keys={["command"]}>
-          K
-        </Kbd>
-      }
-      labelPlacement="outside"
-      placeholder="Search..."
-      startContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-      }
-      type="search"
-    />
+    <label className="flex h-10 min-w-64 items-center gap-2 rounded-lg bg-surface px-3 text-muted">
+      <SearchIcon className="pointer-events-none flex-shrink-0 text-base" />
+      <span className="sr-only">Search</span>
+      <input
+        className="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted"
+        placeholder="Search..."
+        type="search"
+      />
+      <Kbd className="hidden lg:inline-block">Cmd K</Kbd>
+    </label>
   );
 
   return (
-    <HeroUINavbar maxWidth="xl" position="sticky">
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand className="gap-3 max-w-fit">
+    <header className="sticky top-0 z-50 w-full border-b border-separator bg-background/80 backdrop-blur">
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6">
+        <div className="flex min-w-0 flex-1 items-center gap-5">
           <Link
-            className="flex justify-start items-center gap-1"
-            color="foreground"
+            className="flex shrink-0 items-center justify-start gap-1 text-foreground"
             href="/"
           >
             <Logo />
             <p className="font-bold text-inherit">ACME</p>
           </Link>
-        </NavbarBrand>
-        <div className="hidden lg:flex gap-4 justify-start ml-2">
-          {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
+          <div className="ml-2 hidden gap-4 lg:flex">
+            {siteConfig.navItems.map((item) => (
               <Link
                 className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium"
+                  "text-sm text-foreground transition-colors hover:text-accent",
+                  "data-[active=true]:font-medium data-[active=true]:text-accent"
                 )}
-                color="primary"
-                href='/'
+                href={item.href}
+                key={item.href}
               >
                 {item.label}
               </Link>
-            </NavbarItem>
-          ))}
+            ))}
+          </div>
         </div>
-      </NavbarContent>
 
-      <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
-        justify="end"
-      >
-        <NavbarItem className="hidden sm:flex gap-2">
-          <Link href="/" title="Twitter">
-            <TwitterIcon className="text-default-500" />
-          </Link>
-          <Link href="/" title="Discord">
-            <DiscordIcon className="text-default-500" />
-          </Link>
-          <Link as={"a"} href="/" title="GitHub">
-            <GithubIcon className="text-default-500" />
+        <div className="hidden items-center justify-end gap-3 sm:flex">
+          <div className="flex gap-2">
+            <Link aria-label="Twitter" href="/">
+              <TwitterIcon className="text-muted" />
+            </Link>
+            <Link aria-label="Discord" href="/">
+              <DiscordIcon className="text-muted" />
+            </Link>
+            <Link aria-label="GitHub" href="/">
+              <GithubIcon className="text-muted" />
+            </Link>
+            <ThemeSwitch />
+          </div>
+          <div className="hidden lg:flex">{searchInput}</div>
+          <a
+            className={buttonVariants({ size: "sm", variant: "secondary" })}
+            href="/"
+          >
+            <HeartFilledIcon className="text-danger" />
+            Sponsor
+          </a>
+        </div>
+
+        <div className="flex items-center gap-3 sm:hidden">
+          <Link href="/">
+            <GithubIcon className="text-muted" />
           </Link>
           <ThemeSwitch />
-        </NavbarItem>
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-        <NavbarItem className="hidden md:flex">
           <Button
-            as={Link}
-            className="text-sm font-normal text-default-600 bg-default-100"
-            href="/"
-            startContent={<HeartFilledIcon className="text-danger" />}
-            variant="flat"
+            aria-expanded={isMenuOpen}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            onPress={() => setIsMenuOpen((value) => !value)}
+            size="sm"
+            variant="tertiary"
           >
-            Sponsor
+            <span className="text-xs font-semibold leading-none">
+              {isMenuOpen ? "Close" : "Menu"}
+            </span>
           </Button>
-        </NavbarItem>
-      </NavbarContent>
+        </div>
+      </nav>
 
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link href="/">
-          <GithubIcon className="text-default-500" />
-        </Link>
-        <ThemeSwitch />
-        <NavbarMenuToggle />
-      </NavbarContent>
-
-      <NavbarMenu>
-        {searchInput}
-        <div className="mx-4 mt-2 flex flex-col gap-2">
-          {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
+      {isMenuOpen ? (
+        <div className="border-t border-separator px-6 py-4 sm:hidden">
+          {searchInput}
+          <div className="mt-4 flex flex-col gap-2">
+            {siteConfig.navMenuItems.map((item, index) => (
               <Link
-                color={
+                className={clsx(
+                  "py-1 text-lg",
                   index === 2
-                    ? "primary"
+                    ? "text-accent"
                     : index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
-                }
+                      ? "text-danger"
+                      : "text-foreground"
+                )}
                 href="/"
-                size="lg"
+                key={`${item.label}-${index}`}
               >
                 {item.label}
               </Link>
-            </NavbarMenuItem>
-          ))}
+            ))}
+          </div>
         </div>
-      </NavbarMenu>
-    </HeroUINavbar>
+      ) : null}
+    </header>
   );
 };

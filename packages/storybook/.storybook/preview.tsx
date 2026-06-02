@@ -1,5 +1,4 @@
 import type {Preview} from '@storybook/react'
-import {HeroUIProvider} from "@heroui/system";
 
 import "./globals.css";
 
@@ -13,13 +12,6 @@ const preview: Preview = {
         },
         layout: "centered",
     },
-    decorators: [
-        (Story) => (
-            <HeroUIProvider>
-                <Story/>
-            </HeroUIProvider>
-        ),
-    ],
 };
 
 export default preview;
