@@ -17,6 +17,7 @@
     "build:web": "yarn workspace @react-strapi-monorepo-template/web build",
     "build:strapi": "yarn workspace @react-strapi-monorepo-template/strapi build",
     "build:storybook": "yarn workspace @react-strapi-monorepo-template/storybook build-storybook",
+    "clean:node-modules": "pwsh -NoProfile -ExecutionPolicy Bypass -File ./scripts/remove-node-modules.ps1",
     "start:web": "yarn workspace @react-strapi-monorepo-template/web preview",
     "start:strapi": "yarn workspace @react-strapi-monorepo-template/strapi start",
     "test": "yarn test:web && yarn test:storybook",
